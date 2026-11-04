@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C Squared Computer Consulting | Managed IT, Cybersecurity &amp; Cloud since 2004</title>
+<meta name="description" content="C Squared Computer Consulting provides managed IT, cybersecurity, cloud & Microsoft 365, backup and consulting services for 10–200 employee organizations. Based in Littleton, Colorado, serving clients nationwide since 2004.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#020626; --bg2:#06103a; --panel:rgba(255,255,255,.04); --panel2:rgba(255,255,255,.07); --line:rgba(140,190,255,.14); --line2:rgba(140,190,255,.26);
+  --ink:#eef4ff; --mut:#a7b4d4; --dim:#6f7ea8; --sky:#2ea3f2; --cyan:#5fe1ff; --orange:#ff7a1a; --ok:#35e39b;
+  --disp:'Jost',system-ui,sans-serif; --sans:'Manrope',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+  --r:22px; --grad:linear-gradient(100deg,var(--sky),var(--cyan));
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+[id]{scroll-margin-top:90px}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.kick{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);padding:7px 14px;border:1px solid var(--line2);border-radius:999px;background:rgba(46,163,242,.08)}
+.kick::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:blink 2s infinite}
+@keyframes blink{50%{opacity:.3}}
+h1,h2,h3,h4{font-family:var(--disp);font-weight:700;letter-spacing:-.02em;line-height:1.04}
+h2{font-size:clamp(36px,4.8vw,64px);margin-top:18px}
+.g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--mut);font-size:clamp(16.5px,1.4vw,18.5px);max-width:640px}
+section{padding:120px 0;position:relative}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:999px;font-weight:700;font-size:15px;border:1px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;will-change:transform}
+.btn-sky{background:var(--grad);color:#021034;box-shadow:0 12px 34px -12px rgba(46,163,242,.9)}
+.btn-sky:hover{box-shadow:0 18px 44px -12px rgba(95,225,255,.9)}
+.btn-line{border-color:var(--line2);color:var(--ink);background:rgba(255,255,255,.03)}
+.btn-line:hover{background:rgba(255,255,255,.08)}
+.arrow::after{content:"→";display:inline-block;margin-left:8px;transition:transform .2s}
+.btn:hover .arrow::after{transform:translateX(4px)}
+
+/* top + nav */
+.top{font-size:13px;color:var(--mut);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:40px;gap:16px}
+.top a{color:var(--ink)}.top a:hover{color:var(--cyan)}
+.top .r{display:flex;gap:20px;align-items:center}
+header.nav{position:sticky;top:0;z-index:60;background:rgba(2,6,38,.78);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border-bottom:1px solid var(--line)}
+header.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:78px;gap:20px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo .chip{background:#fff;border-radius:12px;padding:6px 10px;display:grid;place-items:center}
+.logo .chip img{height:38px;width:auto}
+nav.main{display:flex;gap:2px}
+nav.main a{padding:9px 13px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--mut);transition:.2s}
+nav.main a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav-r{display:flex;gap:10px;align-items:center}
+.burger{display:none;width:46px;height:46px;border-radius:50%;border:1px solid var(--line2);background:transparent;color:var(--ink);font-size:18px;cursor:pointer}
+
+/* hero */
+.hero{min-height:calc(100vh - 118px);display:flex;align-items:center;padding:60px 0 80px;overflow:hidden;isolation:isolate}
+.hero .bgimg{position:absolute;inset:0;z-index:-3;background:url(img/servers.jpg) center/cover;opacity:.28;transform:scale(1.06);animation:kb 26s ease-out forwards}
+@keyframes kb{to{transform:scale(1.15)}}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(900px circle at 80% 30%,rgba(46,163,242,.28),transparent 55%),radial-gradient(700px circle at 0% 90%,rgba(95,225,255,.1),transparent 60%),linear-gradient(180deg,rgba(2,6,38,.6),var(--bg) 96%)}
+#net{position:absolute;inset:0;z-index:-1;width:100%;height:100%}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(44px,6.4vw,92px);line-height:.98;letter-spacing:-.035em;margin:22px 0 22px}
+.hero h1 .wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em}
+.hero h1 .wd > span{display:inline-block;transform:translateY(110%);animation:up .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i)*80ms + .1s)}
+@keyframes up{to{transform:none}}
+.hero p.sub{color:var(--mut);font-size:clamp(17px,1.5vw,19.5px);max-width:560px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.since{margin-top:26px;font-size:14px;color:var(--dim)}
+.since b{color:var(--ink)}
+
+.dash{position:relative;border-radius:26px;border:1px solid var(--line2);background:linear-gradient(160deg,rgba(14,28,86,.75),rgba(4,10,44,.85));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 50px 100px -40px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.06);padding:22px;animation:fl 7s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-10px)}}
+.dash .bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.dash .bar b{font-family:var(--disp);font-size:18px}
+.dash .bar span{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--ok);display:flex;align-items:center;gap:8px}
+.dash .bar span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);animation:blink 1.4s infinite}
+.pulse{border-radius:16px;background:rgba(0,0,0,.25);border:1px solid var(--line);padding:12px 14px;margin-bottom:12px}
+.pulse small{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--dim)}
+.pulse svg{width:100%;height:70px;display:block}
+.pulse path{fill:none;stroke:var(--cyan);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px rgba(95,225,255,.7))}
+.chk{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chk div{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:14px;opacity:.4;transition:opacity .4s,border-color .4s,background .4s}
+.chk div.on{opacity:1;border-color:rgba(53,227,155,.35);background:rgba(53,227,155,.07)}
+.chk i{font-style:normal;flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:13px;background:rgba(255,255,255,.08);color:var(--dim);transition:.4s}
+.chk div.on i{background:var(--ok);color:#022;box-shadow:0 0 14px rgba(53,227,155,.6)}
+.chk small{display:block;font-size:11.5px;color:var(--dim)}
+.scan{position:absolute;left:22px;right:22px;top:74px;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.7;animation:scan 3.4s ease-in-out infinite;pointer-events:none}
+@keyframes scan{0%,100%{transform:translateY(0)}50%{transform:translateY(250px)}}
+
+/* stats + ticker */
+.stats{display:grid;grid-template-columns:repeat(5,1fr);border-block:1px solid var(--line);background:linear-gradient(90deg,rgba(46,163,242,.05),transparent)}
+.stat{padding:30px 24px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0}
+.stat b{display:block;font-family:var(--disp);font-size:clamp(36px,3.8vw,54px);font-weight:800;line-height:1;letter-spacing:-.03em}
+.stat > span{display:block;color:var(--mut);font-size:13.5px;margin-top:8px;line-height:1.35}
+.ticker{overflow:hidden;padding:20px 0;border-bottom:1px solid var(--line)}
+.ticker .track{display:flex;width:max-content;animation:tick 46s linear infinite}
+.ticker span{font-family:var(--disp);font-weight:700;font-size:clamp(22px,2.4vw,32px);color:#2a3a72;white-space:nowrap;display:flex;align-items:center;letter-spacing:-.01em}
+.ticker span:nth-child(3n+1){color:var(--ink)}
+.ticker span::after{content:"";width:9px;height:9px;border-radius:2px;transform:rotate(45deg);background:var(--sky);margin:0 34px;box-shadow:0 0 12px var(--sky)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* who we serve */
+.serve{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.photo{position:relative;border-radius:28px;overflow:hidden;border:1px solid var(--line)}
+.photo img{width:100%;aspect-ratio:4/4.3;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.photo:hover img{transform:scale(1.04)}
+.photo .tag{position:absolute;left:18px;bottom:18px;padding:14px 18px;border-radius:16px;background:rgba(2,6,38,.78);backdrop-filter:blur(10px);border:1px solid var(--line2)}
+.photo .tag b{font-family:var(--disp);font-size:30px;display:block;line-height:1}
+.photo .tag span{font-size:13px;color:var(--mut)}
+.outs{display:grid;gap:10px;margin-top:26px;list-style:none}
+.outs li{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:16px;background:var(--panel);border:1px solid var(--line);font-weight:600}
+.outs li i{font-style:normal;flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--grad);color:#021034;font-size:13px;font-weight:800;transform:scale(0);transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.outs.in li i{transform:scale(1)}
+.outs li:nth-child(2) i{transition-delay:.15s}.outs li:nth-child(3) i{transition-delay:.3s}.outs li:nth-child(4) i{transition-delay:.45s}
+
+/* break-fix chart */
+#proactive{background:linear-gradient(180deg,var(--bg),var(--bg2) 50%,var(--bg))}
+.vs{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.chart{border-radius:26px;border:1px solid var(--line2);background:rgba(0,0,0,.2);padding:24px}
+.chart svg{width:100%;height:auto;display:block}
+.chart .grid line{stroke:rgba(140,190,255,.08)}
+.chart .bf{fill:none;stroke:#ff6b6b;stroke-width:3;stroke-linejoin:round;stroke-dasharray:1400;stroke-dashoffset:1400}
+.chart .pa{fill:none;stroke:var(--cyan);stroke-width:3.5;stroke-linecap:round;stroke-dasharray:1400;stroke-dashoffset:1400;filter:drop-shadow(0 0 8px rgba(95,225,255,.6))}
+.chart .area{fill:url(#paArea);opacity:0;transition:opacity 1s 1.6s}
+.chart.in .bf{animation:draw 2.4s .2s ease forwards}
+.chart.in .pa{animation:draw 2.4s .9s ease forwards}
+.chart.in .area{opacity:1}
+@keyframes draw{to{stroke-dashoffset:0}}
+.legend{display:flex;gap:22px;flex-wrap:wrap;margin-top:14px;font-size:13.5px;color:var(--mut)}
+.legend span{display:flex;align-items:center;gap:8px}
+.legend i{width:22px;height:3px;border-radius:3px}
+.pairs{display:grid;gap:12px;margin-top:26px}
+.pair{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:18px 20px;border-radius:18px;background:var(--panel);border:1px solid var(--line)}
+.pair b{font-family:var(--disp);font-size:20px}
+.pair i{font-style:normal;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(46,163,242,.14);border:1px solid var(--line2);font-size:20px}
+.pair p{color:var(--mut);font-size:15px;margin-top:2px}
+
+/* services */
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:36px;flex-wrap:wrap;margin-bottom:48px}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.svc{position:relative;grid-column:span 4;min-height:360px;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);isolation:isolate;display:flex;flex-direction:column;justify-content:flex-end;padding:26px;cursor:pointer;text-align:left;background:var(--bg2);transition:border-color .3s,transform .25s;transform-style:preserve-3d}
+.svc.big{grid-column:span 8}
+.svc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1s cubic-bezier(.2,.8,.2,1),filter .5s;filter:saturate(.9) brightness(.85)}
+.svc::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,6,38,.15) 20%,rgba(2,6,38,.94) 80%)}
+.svc:hover{border-color:rgba(95,225,255,.55)}
+.svc:hover img{transform:scale(1.07);filter:saturate(1.1) brightness(.95)}
+.svc .gl{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(380px circle at var(--gx,50%) var(--gy,50%),rgba(95,225,255,.2),transparent 45%);opacity:0;transition:opacity .3s}
+.svc:hover .gl{opacity:1}
+.svc .ix{position:absolute;top:20px;left:22px;font-family:var(--mono);font-size:12px;color:var(--cyan);padding:6px 10px;border-radius:999px;background:rgba(2,6,38,.6);border:1px solid var(--line2)}
+.svc h3{font-size:clamp(26px,2.5vw,36px);position:relative}
+.svc p{color:#c3cde8;font-size:15px;margin-top:8px;position:relative;max-width:520px}
+.svc .go{margin-top:14px;font-weight:700;font-size:14px;color:var(--cyan);position:relative}
+dialog{border:0;padding:0;border-radius:26px;background:#071140;color:var(--ink);width:min(980px,calc(100% - 24px));max-height:calc(100vh - 24px);box-shadow:0 50px 140px -30px rgba(0,0,0,.95),0 0 0 1px var(--line2)}
+dialog::backdrop{background:rgba(1,3,20,.8);backdrop-filter:blur(6px)}
+dialog[open]{animation:pop .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.98)}}
+.dlg img{width:100%;aspect-ratio:16/6.5;object-fit:cover}
+.dlg .b{padding:30px 36px 36px}
+.dlg h3{font-size:clamp(32px,3.6vw,48px)}
+.dlg .tagline{color:var(--cyan);font-weight:600;margin-top:8px}
+.dlg .b > p{color:var(--mut);margin-top:12px}
+.items{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.items div{padding:16px 18px;border-radius:16px;background:var(--panel);border:1px solid var(--line)}
+.items b{display:block;font-family:var(--disp);font-size:18px;margin-bottom:4px}
+.items span{color:var(--mut);font-size:14.5px}
+.apps{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.apps span{padding:7px 13px;border-radius:999px;border:1px solid var(--line2);background:rgba(46,163,242,.08);font-size:13.5px;font-weight:600}
+.x{position:absolute;right:14px;top:14px;z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid var(--line2);background:rgba(2,6,38,.8);color:#fff;font-size:22px;cursor:pointer}
+
+/* security rings */
+.sec{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.rings{position:relative;aspect-ratio:1;max-width:520px;width:100%;margin:0 auto}
+.rings svg{width:100%;height:100%;overflow:visible}
+.rings .r{transform-origin:260px 260px}
+.rings .r1{animation:spin 40s linear infinite}.rings .r2{animation:spin 28s linear infinite reverse}.rings .r3{animation:spin 18s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.rings text{font-family:var(--mono);font-size:12px;letter-spacing:.12em;fill:#cfe6ff}
+.rings .core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:30%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#2a6fd8,#071a5c);display:grid;place-items:center;box-shadow:0 0 0 10px rgba(46,163,242,.12),0 0 60px rgba(46,163,242,.6);animation:beat 2.4s ease-in-out infinite}
+.rings .core svg{width:46%;height:auto}
+@keyframes beat{50%{box-shadow:0 0 0 18px rgba(46,163,242,.06),0 0 80px rgba(95,225,255,.8)}}
+.layers{display:grid;gap:10px;margin-top:24px}
+.layers div{display:grid;grid-template-columns:38px 1fr;gap:14px;align-items:start;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--panel)}
+.layers b{font-family:var(--mono);font-size:12px;color:var(--cyan);padding-top:3px}
+.layers span{font-size:15px}
+
+/* nationwide */
+#nationwide{padding-bottom:60px}
+.map{position:relative;border-radius:30px;overflow:hidden;border:1px solid var(--line2);margin-top:40px}
+.map img{width:100%;aspect-ratio:2/1;object-fit:cover;filter:saturate(1.1)}
+.map::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,6,38,.1),rgba(2,6,38,.55))}
+.pin{position:absolute;z-index:2;transform:translate(-50%,-50%)}
+.pin i{display:block;width:14px;height:14px;border-radius:50%;background:var(--orange);box-shadow:0 0 14px var(--orange);position:relative}
+.pin i::before,.pin i::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--orange);animation:ping 2.4s ease-out infinite}
+.pin i::after{animation-delay:1.2s}
+@keyframes ping{to{transform:scale(4.5);opacity:0}}
+.pin span{position:absolute;left:50%;top:-34px;transform:translateX(-50%);white-space:nowrap;font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.1em;padding:4px 9px;border-radius:8px;background:rgba(2,6,38,.85);border:1px solid rgba(255,122,26,.5)}
+.pin.hq i{background:var(--cyan);box-shadow:0 0 18px var(--cyan)}
+.pin.hq i::before,.pin.hq i::after{border-color:var(--cyan)}
+.pin.hq span{border-color:rgba(95,225,255,.6)}
+.states{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.states span{padding:8px 14px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);font-weight:700;font-size:14px}
+
+/* why + about */
+.why{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:10px}
+.w{border-radius:22px;border:1px solid var(--line);background:var(--panel);padding:26px 24px;transition:border-color .3s,transform .3s}
+.w:hover{border-color:rgba(95,225,255,.5);transform:translateY(-4px)}
+.w i{font-style:normal;display:grid;place-items:center;width:50px;height:50px;border-radius:14px;background:rgba(46,163,242,.14);border:1px solid var(--line2);font-size:22px;margin-bottom:18px}
+.w h4{font-size:22px}
+.w p{color:var(--mut);font-size:14.5px;margin-top:6px}
+.promise{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:80px;align-items:center}
+.promise ul{list-style:none;display:grid;gap:10px;margin-top:24px}
+.promise li{padding:15px 18px;border-radius:14px;border-left:3px solid var(--sky);background:var(--panel);font-size:15.5px}
+.modes{display:grid;gap:12px}
+.mode{border-radius:20px;border:1px solid var(--line);background:linear-gradient(120deg,rgba(46,163,242,.1),transparent 60%);padding:22px 24px}
+.mode b{font-family:var(--disp);font-size:22px}
+.mode p{color:var(--mut);font-size:15px;margin-top:6px}
+.mode.full{border-color:rgba(95,225,255,.4);background:linear-gradient(120deg,rgba(95,225,255,.18),rgba(46,163,242,.05) 70%)}
+
+/* reviews + team */
+.rv-grid{display:grid;grid-template-columns:1fr 1fr .8fr;gap:16px}
+.quote{border-radius:24px;border:1px solid var(--line);background:var(--panel);padding:30px;display:flex;flex-direction:column}
+.stars{color:#ffc542;letter-spacing:3px;font-size:18px}
+.quote blockquote{font-size:16.5px;margin-top:14px;line-height:1.65}
+.quote .who{margin-top:auto;padding-top:20px;display:flex;align-items:center;gap:12px}
+.quote .who i{font-style:normal;width:42px;height:42px;border-radius:50%;background:var(--grad);color:#021034;display:grid;place-items:center;font-weight:800;font-size:14px}
+.quote .who b{display:block}.quote .who span{font-size:12.5px;color:var(--ok);font-family:var(--mono);letter-spacing:.1em}
+.member{border-radius:24px;border:1px solid var(--line2);overflow:hidden;background:linear-gradient(180deg,rgba(46,163,242,.12),var(--panel))}
+.member img{width:100%;aspect-ratio:1;object-fit:cover}
+.member div{padding:20px 22px 24px}
+.member h4{font-size:24px}
+.member .role{color:var(--cyan);font-weight:600;font-size:14px}
+.member a{display:block;font-size:14px;color:var(--mut);margin-top:6px}
+.member a:hover{color:#fff}
+
+/* blog */
+.posts{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.post{display:flex;flex-direction:column;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--panel);transition:transform .3s,border-color .3s}
+.post:hover{transform:translateY(-5px);border-color:rgba(95,225,255,.5)}
+.post .im{overflow:hidden}
+.post img{width:100%;aspect-ratio:16/10;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.post:hover img{transform:scale(1.06)}
+.post div.t{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
+.post h3{font-size:19px;line-height:1.25}
+.post p{color:var(--mut);font-size:14px;margin-top:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.post span{margin-top:auto;padding-top:14px;font-weight:700;font-size:13.5px;color:var(--cyan)}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.cbox{border-radius:28px;padding:44px;border:1px solid var(--line2);background:radial-gradient(700px circle at 100% 0%,rgba(46,163,242,.3),transparent 55%),var(--panel)}
+.clist{display:grid;gap:12px;margin-top:28px}
+.clist a,.clist div{display:flex;gap:16px;align-items:center;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid var(--line);transition:background .2s}
+.clist a:hover{background:rgba(255,255,255,.08)}
+.clist i{font-style:normal;flex:none;width:44px;height:44px;border-radius:12px;background:var(--grad);color:#021034;display:grid;place-items:center;font-size:18px;font-weight:800}
+.clist small{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+.clist b{font-size:17px}
+.social{display:flex;gap:10px;margin-top:20px}
+.social a{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line2);font-weight:800;font-size:13px;transition:.2s}
+.social a:hover{background:var(--sky);color:#021034;border-color:var(--sky)}
+form{display:grid;gap:12px;border-radius:28px;padding:36px;border:1px solid var(--line);background:var(--panel)}
+form label{display:grid;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+input,textarea{width:100%;padding:13px 15px;border-radius:12px;border:1px solid var(--line2);background:rgba(0,0,0,.25);font-size:15px;letter-spacing:0;text-transform:none}
+input:focus,textarea:focus{outline:2px solid var(--sky);outline-offset:-1px;border-color:transparent}
+textarea{min-height:140px;resize:vertical}
+form .btn{justify-content:center;border:0}
+.fnote{font-size:12.5px;color:var(--dim);text-align:center}
+
+footer{border-top:1px solid var(--line);padding:50px 0 34px;color:var(--mut);font-size:14px}
+.f{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.f nav{display:flex;gap:18px;flex-wrap:wrap}
+.f nav a:hover{color:#fff}
+.legal{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--dim)}
+
+#prog{position:fixed;left:0;top:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--grad);z-index:100;box-shadow:0 0 12px var(--cyan)}
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}.hero h1 .wd > span{transform:none}.chart .bf,.chart .pa{stroke-dashoffset:0}.chart .area{opacity:1}.outs li i{transform:none}}
+
+@media (max-width:1100px){
+  nav.main{display:none}.burger{display:grid;place-items:center}
+  nav.main.open{display:flex;flex-direction:column;position:absolute;top:78px;left:12px;right:12px;padding:12px;border-radius:20px;background:#071140;border:1px solid var(--line2);box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
+  .posts{grid-template-columns:repeat(2,1fr)}
+  .why{grid-template-columns:1fr 1fr}
+}
+@media (max-width:960px){
+  section{padding:88px 0}
+  .hero-grid,.serve,.vs,.sec,.promise,.contact{grid-template-columns:1fr}
+  .hero{min-height:0}
+  .dash{max-width:520px;width:100%;margin:10px auto 0}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .stat:nth-child(4){border-left:0}.stat:nth-child(n+4){border-top:1px solid var(--line)}
+  .svc,.svc.big{grid-column:span 6;min-height:320px}
+  .svc.big{grid-column:1/-1}
+  .rv-grid{grid-template-columns:1fr 1fr}
+  .member{grid-column:1/-1;display:grid;grid-template-columns:200px 1fr}
+  .member img{height:100%}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .top .hide-sm,.hide-sm{display:none!important}
+  .top .wrap{justify-content:center}
+  header.nav .wrap{height:68px}nav.main.open{top:68px}
+  .logo .chip img{height:30px}
+  .chk{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{padding:22px 16px}
+  .stat:nth-child(odd){border-left:0}.stat:nth-child(4){border-left:1px solid var(--line)}.stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .bento{grid-template-columns:1fr}
+  .svc,.svc.big{grid-column:1/-1;min-height:300px}
+  .items{grid-template-columns:1fr}
+  .dlg .b,.cbox{padding:26px 20px}
+  .why,.rv-grid,.posts{grid-template-columns:1fr}
+  .member{display:block}
+  .pin span{font-size:10px;top:-28px}
+  .map img{aspect-ratio:4/3}
+  form{padding:22px}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+
+<div class="top"><div class="wrap">
+  <span class="hide-sm">Serving Colorado and clients nationwide since 2004</span>
+  <div class="r"><a href="tel:+13039331113">(303) 933-1113</a><a class="hide-sm" href="mailto:sales@c2cc.net">sales@c2cc.net</a></div>
+</div></div>
+
+<header class="nav"><div class="wrap">
+  <a href="#top" class="logo" aria-label="C Squared Computer Consulting home"><span class="chip"><img src="img/logo.png" alt="C Squared Computer Consulting Inc."></span></a>
+  <nav class="main" id="mnav">
+    <a href="#services">Solutions</a><a href="#security">Security</a><a href="#about">About</a><a href="#reviews">Reviews</a><a href="#team">Team</a><a href="#blog">Blog</a><a href="#contact">Contact</a>
+  </nav>
+  <div class="nav-r"><a class="btn btn-sky hide-sm" href="#contact" style="padding:11px 20px">Book a discovery call</a><button class="burger" aria-label="Menu" onclick="document.getElementById('mnav').classList.toggle('open')">☰</button></div>
+</div></header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero">
+  <div class="bgimg" aria-hidden="true"></div>
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="kick rv">C Squared Computer Consulting</span>
+      <h1 id="h1">Secure, proactive IT for <span class="g">growing businesses.</span></h1>
+      <p class="sub rv">We provide managed IT, cybersecurity, and cloud services that keep your systems reliable, your data protected, and your team productive, so you can stay focused on running your organization.</p>
+      <div class="ctas rv"><a class="btn btn-sky" href="#contact"><span class="arrow">Schedule a 20-minute discovery call</span></a><a class="btn btn-line" href="#services">Explore solutions</a></div>
+      <p class="since rv">◆ Serving Colorado and clients nationwide with <b>stable, long-term MSP relationships since 2004.</b></p>
+    </div>
+    <div class="dash rv" aria-hidden="true">
+      <span class="scan"></span>
+      <div class="bar"><b>Your IT, monitored</b><span>ALWAYS ON</span></div>
+      <div class="pulse"><small>NETWORK HEALTH · PROACTIVE MONITORING</small><svg viewBox="0 0 400 70" preserveAspectRatio="none"><path id="ecg" d=""/></svg></div>
+      <div class="chk" id="chk">
+        <div><i>✓</i><span>Endpoints<small>Next-gen protection</small></span></div>
+        <div><i>✓</i><span>Patches<small>Managed updates</small></span></div>
+        <div><i>✓</i><span>Email<small>Filtered &amp; encrypted</small></span></div>
+        <div><i>✓</i><span>Identity<small>Threat detection</small></span></div>
+        <div><i>✓</i><span>Backups<small>Local + cloud</small></span></div>
+        <div><i>✓</i><span>Help desk<small>Live, 24/7</small></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat rv"><b class="g"><span class="count" data-to="2004" data-plain="1">2004</span></b><span>Year founded</span></div>
+  <div class="stat rv"><b class="g"><span class="count" data-to="20">20</span>+</b><span>Years of reliable IT solutions</span></div>
+  <div class="stat rv"><b class="g">24/7</b><span>Live help desk</span></div>
+  <div class="stat rv"><b class="g">10–200</b><span>Employee organizations we partner with</span></div>
+  <div class="stat rv"><b class="g"><span class="count" data-to="6">6</span> states</b><span>And always expanding, nationwide</span></div>
+</div>
+<div class="ticker" aria-hidden="true"><div class="track" id="ticker"></div></div>
+
+<!-- WHO WE SERVE -->
+<section id="serve">
+  <div class="wrap serve">
+    <div class="photo rv"><img src="img/office.jpg" alt="Modern office, IT solutions" loading="lazy"><div class="tag"><b>10–200</b><span>Employee organizations</span></div></div>
+    <div>
+      <span class="kick rv">Who we serve</span>
+      <h2 class="rv">Your long-term <span class="g">technology partner.</span></h2>
+      <p class="lead rv" style="margin-top:18px">We align IT with your business goals, not just address issues as they arise. We work best with organizations that see technology as a strategic asset, who value our expertise and trust us to implement recommendations that support their growth.</p>
+      <ul class="outs rv">
+        <li><i>✓</i>Reduced downtime and fewer unexpected surprises</li>
+        <li><i>✓</i>A stronger security posture and better risk management</li>
+        <li><i>✓</i>Clear alignment between IT initiatives and business goals</li>
+        <li><i>✓</i>A roadmap that supports growth, compliance, and continuity</li>
+      </ul>
+      <div class="rv" style="margin-top:24px"><a class="btn btn-line" href="#contact"><span class="arrow">Not sure where to start? Request a quick IT health check</span></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROACTIVE VS BREAK-FIX -->
+<section id="proactive">
+  <div class="wrap vs">
+    <div>
+      <span class="kick rv">Your technology, simplified</span>
+      <h2 class="rv">This isn't break-fix. <span class="g">It's always-on.</span></h2>
+      <p class="lead rv" style="margin-top:18px">Modern businesses need more than basic tech support. They need strategic IT leadership, proactive management, and solutions that adapt as they grow. C Squared delivers all of that under one partnership.</p>
+      <div class="pairs">
+        <div class="pair rv"><i>⚙</i><div><b>Technical consulting</b><p>The hardware, systems, networks and configurations that keep you running, from troubleshooting to full infrastructure deployments.</p></div></div>
+        <div class="pair rv"><i>⇄</i><div><b>Functional consulting</b><p>Smarter tools and processes that fit how your team works, making technology faster, easier, and more efficient.</p></div></div>
+        <div class="pair rv"><i>◎</i><div><b>Complete IT partnership</b><p>Strategy, support, maintenance and guidance tailored to your business, all with one point of contact.</p></div></div>
+      </div>
+    </div>
+    <div class="chart rv" id="chart">
+      <svg viewBox="0 0 600 340" aria-label="Illustration: break-fix IT causes repeated downtime spikes, while proactive managed IT keeps systems steady">
+        <defs><linearGradient id="paArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5fe1ff" stop-opacity=".28"/><stop offset="1" stop-color="#5fe1ff" stop-opacity="0"/></linearGradient></defs>
+        <g class="grid"><line x1="40" y1="60" x2="580" y2="60"/><line x1="40" y1="130" x2="580" y2="130"/><line x1="40" y1="200" x2="580" y2="200"/><line x1="40" y1="270" x2="580" y2="270"/></g>
+        <text x="40" y="30" fill="#6f7ea8" font-family="JetBrains Mono" font-size="11" letter-spacing="2">DISRUPTION</text>
+        <text x="500" y="316" fill="#6f7ea8" font-family="JetBrains Mono" font-size="11" letter-spacing="2">TIME →</text>
+        <path class="bf" d="M40 250 L90 248 L110 90 L130 246 L190 244 L205 60 L225 242 L290 246 L310 110 L330 244 L390 240 L402 70 L420 242 L480 246 L500 100 L520 244 L580 242"/>
+        <path class="area" d="M40 262 C 160 258, 300 264, 420 260 S 540 262, 580 260 L580 280 L40 280 Z"/>
+        <path class="pa" d="M40 262 C 160 258, 300 264, 420 260 S 540 262, 580 260"/>
+      </svg>
+      <div class="legend"><span><i style="background:#ff6b6b"></i>Break-fix: wait for it to break</span><span><i style="background:#5fe1ff"></i>C Squared: fix issues before they hit</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kick rv">Our solutions</span><h2 class="rv">Empowering business by <span class="g">leveraging technology.</span></h2></div>
+      <p class="lead rv">"Think of us as your tech safety net: we fix issues before they hit, and make sure your systems support your growth." Tap any solution for the details.</p>
+    </div>
+    <div class="bento" id="bento"></div>
+  </div>
+</section>
+<dialog id="dlg"><button class="x" aria-label="Close" onclick="this.closest('dialog').close()">×</button><div id="dlgBody"></div></dialog>
+
+<!-- SECURITY -->
+<section id="security" style="padding-top:20px">
+  <div class="wrap sec">
+    <div class="rings rv" aria-hidden="true">
+      <svg viewBox="0 0 520 520">
+        <defs><path id="c1" d="M260 260 m-235 0 a235 235 0 1 1 470 0 a235 235 0 1 1 -470 0"/><path id="c2" d="M260 260 m-175 0 a175 175 0 1 1 350 0 a175 175 0 1 1 -350 0"/><path id="c3" d="M260 260 m-118 0 a118 118 0 1 1 236 0 a118 118 0 1 1 -236 0"/></defs>
+        <g class="r r1"><circle cx="260" cy="260" r="235" fill="none" stroke="rgba(140,190,255,.2)" stroke-dasharray="3 9"/><text><textPath href="#c1">FIREWALLS · ROUTERS · MONITORING SOFTWARE · NETWORK INFRASTRUCTURE · FIREWALLS · ROUTERS ·</textPath></text></g>
+        <g class="r r2"><circle cx="260" cy="260" r="175" fill="none" stroke="rgba(95,225,255,.35)" stroke-width="1.5" stroke-dasharray="80 30 10 30"/><text><textPath href="#c2">ENDPOINT PROTECTION · MAIL PROTECTION · IDENTITY THREAT DETECTION ·</textPath></text></g>
+        <g class="r r3"><circle cx="260" cy="260" r="118" fill="none" stroke="rgba(46,163,242,.6)" stroke-width="2"/><text><textPath href="#c3">BACKUP · USER TRAINING · RECOVERY ·</textPath></text></g>
+      </svg>
+      <div class="core"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>
+    </div>
+    <div>
+      <span class="kick rv">Cybersecurity</span>
+      <h2 class="rv">Layered security for <span class="g">real-world threats.</span></h2>
+      <p class="lead rv" style="margin-top:18px">Today's cyber threats evolve fast. We build layered security programs designed to prevent breaches, secure your data, and keep your systems safe, built with the most unfavorable scenario in mind.</p>
+      <div class="layers">
+        <div class="rv"><b>01</b><span>Next-generation endpoint protection &amp; advanced threat protection</span></div>
+        <div class="rv"><b>02</b><span>Mail protection: filtering, encryption and archiving</span></div>
+        <div class="rv"><b>03</b><span>Identity threat detection and remediation</span></div>
+        <div class="rv"><b>04</b><span>Firewalls, routers and proactive monitoring of bandwidth, storage and file access</span></div>
+        <div class="rv"><b>05</b><span>Secure, monitored backups with rapid recovery, plus user training</span></div>
+      </div>
+      <div class="rv" style="margin-top:24px"><a class="btn btn-sky" href="#contact"><span class="arrow">Request a cybersecurity &amp; backup review</span></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- NATIONWIDE -->
+<section id="nationwide">
+  <div class="wrap">
+    <div class="head" style="margin-bottom:0">
+      <div><span class="kick rv">Local roots, national reach</span><h2 class="rv">Nationwide technology solutions that <span class="g">keep you moving.</span></h2></div>
+      <p class="lead rv">Based in the Denver area and supporting businesses across the entire United States. Our current clients are in CO, ND, SD, CA, AZ and TX, and we're always expanding.</p>
+    </div>
+    <div class="map rv">
+      <img src="img/us-map.jpg" alt="Map of the United States with network connections" loading="lazy">
+      <div class="pin hq" style="left:34%;top:41%"><i></i><span>CO · HQ</span></div>
+      <div class="pin" style="left:46.5%;top:25%"><i></i><span>ND</span></div>
+      <div class="pin" style="left:46.5%;top:34%"><i></i><span>SD</span></div>
+      <div class="pin" style="left:15.5%;top:40%"><i></i><span>CA</span></div>
+      <div class="pin" style="left:27%;top:50%"><i></i><span>AZ</span></div>
+      <div class="pin" style="left:46%;top:59%"><i></i><span>TX</span></div>
+    </div>
+    <div class="states rv"><span>Colorado</span><span>North Dakota</span><span>South Dakota</span><span>California</span><span>Arizona</span><span>Texas</span></div>
+  </div>
+</section>
+
+<!-- ABOUT / WHY -->
+<section id="about">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kick rv">Why C Squared</span><h2 class="rv">Powered by experience. <span class="g">Driven by solutions.</span></h2></div>
+      <p class="lead rv">For over 20 years, C Squared has helped organizations modernize their technology, reduce downtime, strengthen security, and operate with confidence. What began as a small consultancy is now a full-service managed IT provider serving businesses across the country.</p>
+    </div>
+    <div class="why">
+      <div class="w rv"><i>✦</i><h4>Personalized support</h4><p>Every business has unique needs. We design solutions around your goals, team, and workflows.</p></div>
+      <div class="w rv"><i>⌖</i><h4>Local roots, national reach</h4><p>Based in Denver and serving clients across the U.S., with personal service and scalable capabilities.</p></div>
+      <div class="w rv"><i>✎</i><h4>Education &amp; empowerment</h4><p>We make technology understandable so your team always feels confident and informed.</p></div>
+      <div class="w rv"><i>☰</i><h4>Clear communication</h4><p>No jargon. No confusion. Just transparent, reliable guidance every step of the way.</p></div>
+    </div>
+    <div class="promise">
+      <div>
+        <h3 class="rv" style="font-size:clamp(28px,3vw,40px)">Why organizations choose us</h3>
+        <p class="rv" style="color:var(--mut);margin-top:12px">We're driven by our passion for helping people and our love of technology. Our purpose is to empower businesses through the effective use of technology, helping them navigate change and align technology investments with their goals.</p>
+        <ul>
+          <li class="rv">Stable, long-term staffing that understands your environment and team</li>
+          <li class="rv">Warm, personable support that treats your users with respect</li>
+          <li class="rv">A willingness to consider multiple perspectives when designing solutions</li>
+          <li class="rv">Openness to innovation and change as technology and risks evolve</li>
+          <li class="rv">A focus on measurable business outcomes, not just technical metrics</li>
+        </ul>
+      </div>
+      <div class="modes">
+        <div class="photo rv" style="margin-bottom:4px"><img src="img/team-monitors.jpg" alt="C Squared technicians monitoring client systems" loading="lazy" style="aspect-ratio:16/9"></div>
+        <div class="mode rv"><b>Committed service</b><p>We treat every client as a partner. Your goals drive our approach, strategy, and recommendations.</p></div>
+        <div class="mode rv"><b>Reliable expertise</b><p>Proactive support, modern IT solutions, and industry best practices that keep your systems running smoothly.</p></div>
+        <div class="mode full rv"><b>People-first technology</b><p>Great IT starts with understanding people, then building solutions that support how they work. Technology should empower people.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS + TEAM -->
+<section id="reviews" style="padding-top:20px">
+  <div class="wrap">
+    <div class="head"><div><span class="kick rv">What our clients say</span><h2 class="rv">A partner who responds <span class="g">when it matters.</span></h2></div>
+      <p class="lead rv">All reviews shown are live and unedited. <a href="https://c2cc.net/reviews-2/" target="_blank" rel="noopener" style="color:var(--cyan);font-weight:700">Leave a review →</a></p></div>
+    <div class="rv-grid" id="team">
+      <div class="quote rv"><div class="stars">★★★★★</div><blockquote>"I am absolutely amazed and grateful for the amazing support every time I reach out to C Squared. I usually work with Jonathan Ropa and can't tell you how confident I feel knowing he is working my issue. Not only did he fix my issue today, but while we were waiting for the update to run, he gave me some incredible insight into a project I'm working on for our organization."</blockquote><div class="who"><i>LP</i><span><b>Linda Pocsik</b><span>VERIFIED REVIEW</span></span></div></div>
+      <div class="quote rv"><div class="stars">★★★★★</div><blockquote>"Very bright, talented technicians on top of IT technology needs. Have worked with them for a few years. Very responsive. I appreciate the leadership of Marcie in bringing together such a resourceful team."</blockquote><div class="who"><i>NW</i><span><b>NC Wilson</b><span>VERIFIED REVIEW</span></span></div></div>
+      <div class="member rv"><img src="img/stephanie.jpg" alt="Stephanie Gill-Gale" loading="lazy"><div><span class="mono" style="color:var(--dim)">Meet the team</span><h4>Stephanie Gill-Gale</h4><span class="role">Client Success Manager</span><a href="tel:+13039331113">Mobile: 303 933 1113</a><a href="mailto:sgill-gale@c2cc.net">sgill-gale@c2cc.net</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog" style="padding-top:20px">
+  <div class="wrap">
+    <div class="head"><div><span class="kick rv">Insights</span><h2 class="rv">Stay ahead of <span class="g">the threats.</span></h2></div><a class="btn btn-line rv" href="https://c2cc.net/blog/" target="_blank" rel="noopener"><span class="arrow">All articles</span></a></div>
+    <div class="posts" id="posts"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding-top:20px">
+  <div class="wrap contact">
+    <div class="cbox rv">
+      <span class="kick">Let's connect</span>
+      <h2 style="font-size:clamp(38px,4.4vw,60px)">Ready to strengthen your <span class="g">IT and security?</span></h2>
+      <p class="lead" style="margin-top:14px">Let's build smarter solutions together. Whether you need IT support, cloud services, or expert consulting, our team is ready to help your business stay connected, secure, and efficient.</p>
+      <div class="clist">
+        <a href="tel:+13039331113"><i>☏</i><span><small>Call</small><b>(303) 933-1113</b></span></a>
+        <a href="mailto:sales@c2cc.net"><i>@</i><span><small>Email</small><b>sales@c2cc.net</b></span></a>
+        <a href="https://maps.google.com/?q=8156+S+Wadsworth+Blvd+E-489,+Littleton,+CO+80128" target="_blank" rel="noopener"><i>⌖</i><span><small>Mailing address</small><b>8156 S Wadsworth Blvd E-489, Littleton, CO 80128</b></span></a>
+      </div>
+      <div class="social"><a href="https://www.facebook.com/CSquaredIT/" target="_blank" rel="noopener" aria-label="Facebook">f</a><a href="https://www.linkedin.com/company/c-squared-computer-consulting-inc-" target="_blank" rel="noopener" aria-label="LinkedIn">in</a><a href="https://www.instagram.com/csquaredmsp/" target="_blank" rel="noopener" aria-label="Instagram">ig</a><a href="https://x.com/CSquaredMSP" target="_blank" rel="noopener" aria-label="X">X</a></div>
+    </div>
+    <form class="rv" id="cform">
+      <h3 style="font-size:30px">Get in touch</h3>
+      <label>Name<input id="cn" required autocomplete="name"></label>
+      <label>Email address<input id="ce" type="email" required autocomplete="email"></label>
+      <label>Message<textarea id="cm" placeholder="Tell us about your team and what you need, e.g. a 20-minute discovery call or an IT health check."></textarea></label>
+      <button class="btn btn-sky" type="submit"><span class="arrow">Send message</span></button>
+      <p class="fnote">Opens your email app addressed to sales@c2cc.net.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <div class="f">
+    <a href="#top" class="logo"><span class="chip"><img src="img/logo.png" alt="C Squared Computer Consulting"></span></a>
+    <nav><a href="#services">Managed Solutions</a><a href="#security">Security Solutions</a><a href="#services">Collaboration/Cloud</a><a href="#services">Backup</a><a href="#services">Consulting</a><a href="#services">Hardware</a><a href="#services">Repair &amp; Support</a></nav>
+  </div>
+  <div class="legal">Copyright ©2026 · C Squared Computer Consulting · 8156 S. Wadsworth Blvd., Unit E-489, Littleton, CO 80128 · (303) 933-1113 · sales@c2cc.net</div>
+</div></footer>
+
+<script>
+(function () {
+  var $ = function (s) { return document.querySelector(s); }, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+
+  // solutions (text from c2cc.net service pages)
+  var S = [
+    { t: 'Managed IT Services', big: 1, img: 'img/managed.jpg', s: 'Ongoing management, maintenance and support for your network, endpoints and critical systems. We prevent issues before they disrupt your operations.',
+      tag: 'We manage your technology so you can manage your business.', p: 'Maintaining a healthy business network includes network protection and system monitoring. C Squared installs management and monitoring solutions to keep you informed of your network health and employee web engagement.',
+      items: [['Monitoring', 'Awareness technology to monitor web usage, track firewall engagement, and control web access parameters.'], ['Patch management', 'System and software updates, including antivirus, customized so the right patches enhance your efficiency.'],
+        ['Preventative maintenance', 'A thorough tune-up: virus and malware removal, clearing temporary files, drive optimization and much more.'], ['Email protection, filtering & archiving', 'Mail filtering and encryption, email archiving, and protection against your IP being wrongly blacklisted.'],
+        ['Live help desk', 'Our 24/7 help desk monitors and maintains your managed solutions.'], ['Remote access service', 'Our techs are trained in LogMeIn Rescue for secure remote access.']] },
+    { t: 'Cybersecurity', img: 'img/firewall.jpg', s: 'Layered security programs that address real-world threats, from endpoint and mail protection to identity threat detection, backup and user training.', anchor: '#security',
+      tag: 'Keeping your network safe and secure.', p: "The blue screen of death doesn't have to be the end of your PC. We protect your network and computers from the latest viruses and malware looking for an easy target. Our job is to keep your business from becoming the next viral victim.",
+      items: [['Advanced threat protection', 'Endpoint protection plus identity threat detection and remediation.'], ['Firewalls & routers', 'Network security hardware, configured and managed.'],
+        ['Monitoring software', 'Monitors bandwidth, file storage levels and file access to alert you of potential risks or crashes ahead of time.']] },
+    { t: 'Cloud & Microsoft 365', img: 'img/cloud.jpg', s: 'We design, secure and manage Microsoft 365 and hybrid cloud environments, so your team can collaborate securely from anywhere.',
+      tag: 'Cloud solutions for seamless collaboration.', p: 'As a proud Microsoft Silver Partner, we help you find the right Microsoft 365 business plan, migrate safely, protect identities and data, and get the most from your cloud investments.',
+      apps: ['Outlook', 'Teams', 'Word', 'Excel', 'PowerPoint', 'Access', 'SharePoint', 'Audio Conferencing'],
+      items: [['Domain services', 'Domain registration and SSL certificates that authenticate your site and encrypt information sent to your server.'], ['Hosted file sharing', 'One central location to store, share and access business files across locations and remote contributors.']] },
+    { t: 'Backup & Recovery', img: 'img/rack.jpg', s: 'Secure backups and rapid recovery so your business stays operational, no matter what.',
+      tag: 'Not all backups are created equal.', p: "Ransomware is a mature, highly organized business model targeting companies of every size. We protect your data with secure, monitored, easy-to-manage backups, so in the event of an attack or system failure your information is restored quickly and accurately.",
+      items: [['Local backups', 'Full system images or critical data on secure onsite hardware, for faster recovery and minimal downtime.'], ['Cloud backups', 'Secure offsite protection in the cloud, so your data survives even if your office does not.']] },
+    { t: 'Consulting & Growth Planning', img: 'img/network-hands.jpg', s: 'Expert guidance to align your technology with your goals, and a clear roadmap so you can scale without chaos.',
+      tag: 'Strategic IT consulting for smarter business decisions.', p: 'Our consulting team helps you identify the right tools, workflows, compliance, asset planning and strategies. Growth planning anticipates technology needs, aligns budgets, and designs a secure, scalable infrastructure before expansion hits.',
+      items: [['Project & IT development', 'The right tech solutions for both specific projects and your overall IT needs.'], ['Assessments & audits', 'Vulnerability scans and best-practice analysis, with a detailed report of recommendations and action steps.'],
+        ['Growth planning & IT strategy', 'Roadmaps for user growth, new locations and system upgrades, so IT supports momentum instead of slowing it.']] },
+    { t: 'Hardware Solutions', img: 'img/cables.jpg', s: 'Computers, servers and network hardware chosen for your needs, budget and long-term strategy: sourced, installed and configured.',
+      tag: 'Technology that powers your business.', p: 'From computers to routers, cabling and tablets, we provide the hardware you need to grow, and make sure it all works together.',
+      items: [['Computers', 'The right desktops, laptops or tablets for your team.'], ['Servers', 'Built and customized to maintain your office network.'], ['Network infrastructure', 'Firewalls, routers, cabling and the other components vital to your network\'s health.']] },
+    { t: 'Repair & Support Center', img: 'img/team-woman.jpg', s: 'Fast, reliable help when something breaks or slows your team down, on-site or remote.',
+      tag: 'Think of us as network ninjas: quick, quiet, and really good at getting the job done.', p: 'Our technicians provide responsive support, quick troubleshooting and clear communication, so issues get resolved, productivity stays high, and your business keeps moving.',
+      items: [['Live help desk 24/7', 'Phone, live chat and more.'], ['Remote assistance', 'Diagnose and fix issues remotely, fast.'], ['On-site assistance', 'When it needs hands on, we send in our computer ninjas.']] }
+  ];
+  $('#bento').innerHTML = S.map(function (s, i) {
+    return '<button class="svc rv' + (s.big ? ' big' : '') + '" data-i="' + i + '"><img src="' + s.img + '" alt="" loading="lazy"><span class="gl"></span><span class="ix">0' + (i + 1) + '</span><h3>' + esc(s.t) + '</h3><p>' + esc(s.s) + '</p><span class="go">Learn more →</span></button>';
+  }).join('');
+  $('#bento').addEventListener('click', function (e) {
+    var b = e.target.closest('.svc'); if (!b) return; var s = S[+b.dataset.i];
+    $('#dlgBody').innerHTML = '<div class="dlg"><img src="' + s.img + '" alt=""><div class="b"><span class="mono" style="color:var(--cyan)">Solution 0' + (+b.dataset.i + 1) + '</span><h3>' + esc(s.t) + '</h3><div class="tagline">' + esc(s.tag) + '</div><p>' + esc(s.p) + '</p>' +
+      (s.apps ? '<div class="apps">' + s.apps.map(function (a) { return '<span>' + a + '</span>'; }).join('') + '</div>' : '') +
+      '<div class="items">' + s.items.map(function (x) { return '<div><b>' + esc(x[0]) + '</b><span>' + esc(x[1]) + '</span></div>'; }).join('') + '</div>' +
+      '<div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-sky" href="#contact" onclick="document.getElementById(\'dlg\').close()"><span class="arrow">Talk to us about ' + esc(s.t) + '</span></a></div></div></div>';
+    $('#dlg').showModal(); $('#dlg').scrollTop = 0;
+  });
+  $('#dlg').addEventListener('click', function (e) { if (e.target.id === 'dlg') e.target.close(); });
+
+  // ticker
+  var tk = ['Managed IT', 'Cybersecurity', 'Cloud & Microsoft 365', 'Backup & Recovery', 'Growth Planning', 'Hardware', 'Repair & Support', '24/7 Help Desk', 'Identity Protection', 'Email Security'];
+  var th = tk.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join(''); $('#ticker').innerHTML = th + th;
+
+  // blog
+  var P = [['Lock It Down: Don\'t Leave the Door Open for Cybercriminals', 'lock-it-down-cybersecurity-awareness-month', 'October is Cybersecurity Awareness Month, but protecting your business from cyber threats is a year-round responsibility.'],
+    ['Why HIPAA Training Still Matters in 2026 (and What\'s New This Year)', 'why-hipaa-training-matters-2026', 'If you work in healthcare, you\'ve probably wondered: "Didn\'t I just take HIPAA training?" HIPAA itself isn\'t standing still.'],
+    ['Cyber Threats & Your Small Business: A 2025–2026 Reality Check', 'small-business-cybersecurity-2025-2026', 'The "it won\'t happen to me" mindset is exactly what cybercriminals count on.'],
+    ['Spring Break Cybersecurity: Protect Your Personal Data for a Safe Vacation', 'spring-break-cybersecurity-how-to-protect-your-personal-data-for-a-safe-and-worry-free-vacation', 'Wherever you\'re heading, take precautions to keep your personal data safe while you travel.'],
+    ['The Growing Threat of Phishing: Spoofing e-Signature Providers', 'the-growing-threat-of-phishing-spoofing-e-signature-providers', 'Hackers are now using advanced tactics, like spoofing e-signature providers, to steal credentials.'],
+    ['Identity is the New Attack Surface: How Hackers are Stealing and Abusing Identities', 'identity-is-the-new-attack-surface-how-hackers-are-stealing-and-abusing-identities', 'Hackers no longer need to "break into" a system. Instead, they log in.'],
+    ['Choosing the Right Endpoint Detection & Response (EDR) Solution', 'choosing-the-right-endpoint-detection-response-edr-solution-what-to-look-for', 'EDR solutions continuously monitor and respond to threats. Here\'s what to look for.'],
+    ['The Costly Cyber Threat You Can\'t Afford to Ignore: Business Email Compromise (BEC)', 'the-costly-cyber-threat-you-cant-afford-to-ignore-business-email-compromise-bec', 'One of the most costly and dangerous cyber attacks targets businesses of every size.']];
+  $('#posts').innerHTML = P.map(function (p, i) { return '<a class="post rv" href="https://c2cc.net/' + p[1] + '/" target="_blank" rel="noopener"><div class="im"><img src="img/blog/' + (i + 1) + '.jpg" alt="" loading="lazy"></div><div class="t"><h3>' + esc(p[0]) + '</h3><p>' + esc(p[2]) + '</p><span>Read article →</span></div></a>'; }).join('');
+
+  // contact form -> email app
+  $('#cform').onsubmit = function (e) {
+    e.preventDefault();
+    var body = 'Name: ' + $('#cn').value + '\nEmail: ' + $('#ce').value + '\n\n' + $('#cm').value;
+    location.href = 'mailto:sales@c2cc.net?subject=' + encodeURIComponent('Website enquiry from ' + $('#cn').value) + '&body=' + encodeURIComponent(body);
+  };
+
+  // hero headline: rise word by word
+  var h1 = $('#h1'), n = 0;
+  (function split(node) {
+    [].slice.call(node.childNodes).forEach(function (c) {
+      if (c.nodeType === 3) {
+        var f = document.createDocumentFragment();
+        c.textContent.split(/(\s+)/).forEach(function (w) {
+          if (!w) return; if (/^\s+$/.test(w)) { f.appendChild(document.createTextNode(w)); return; }
+          var o = document.createElement('span'); o.className = 'wd'; var i = document.createElement('span'); i.textContent = w; i.style.setProperty('--i', n++);
+          if (node.classList && node.classList.contains('g')) i.className = 'g'; o.appendChild(i); f.appendChild(o);
+        });
+        node.replaceChild(f, c);
+      } else if (c.nodeType === 1) split(c);
+    });
+  })(h1);
+  [].slice.call(h1.querySelectorAll('span.g')).forEach(function (g) { if (g.querySelector('.wd')) g.classList.remove('g'); });
+
+  // reveal, count-up, chart, checklist
+  if ('IntersectionObserver' in window) {
+    document.documentElement.classList.add('js');
+    var countUp = function (el) {
+      if (reduce) return; var to = +el.dataset.to, plain = el.dataset.plain, from = plain ? to - 34 : 0, t0 = performance.now();
+      (function f(t) { var k = Math.min(1, (t - t0) / 1600), v = Math.round(from + (to - from) * (1 - Math.pow(1 - k, 3))); el.textContent = v; if (k < 1) requestAnimationFrame(f); })(t0);
+    };
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (!e.isIntersecting) return; e.target.classList.add('in'); e.target.querySelectorAll('.count').forEach(countUp); io.unobserve(e.target); }); }, { threshold: .15 });
+    document.querySelectorAll('.rv').forEach(function (el, i) { el.style.transitionDelay = (i % 4) * 70 + 'ms'; if (el.getBoundingClientRect().top < innerHeight) requestAnimationFrame(function () { el.classList.add('in'); }); io.observe(el); });
+    setTimeout(function () { document.querySelectorAll('.rv:not(.in)').forEach(function (el) { if (el.getBoundingClientRect().top < innerHeight * 1.2) el.classList.add('in'); }); }, 1500);
+  }
+  var prog = $('#prog');
+  addEventListener('scroll', function () { var m = document.documentElement.scrollHeight - innerHeight; prog.style.transform = 'scaleX(' + (m > 0 ? scrollY / m : 0) + ')'; }, { passive: true });
+  document.querySelectorAll('#mnav a').forEach(function (a) { a.addEventListener('click', function () { $('#mnav').classList.remove('open'); }); });
+
+  // dashboard: checks light up one by one
+  var cks = [].slice.call(document.querySelectorAll('#chk div'));
+  if (reduce) { cks.forEach(function (c) { c.classList.add('on'); }); return; }
+  var ci = 0; setInterval(function () { if (ci < cks.length) cks[ci++].classList.add('on'); else { cks.forEach(function (c) { c.classList.remove('on'); }); ci = 0; } }, 650);
+
+  // heartbeat line
+  var ecg = $('#ecg'), pts = [], W = 400, step = 4, ph = 0;
+  for (var x = 0; x <= W; x += step) pts.push(35);
+  (function beat() {
+    ph++; pts.shift();
+    var k = ph % 60, y = 35 + (Math.random() - .5) * 3;
+    if (k === 30) y = 32; if (k === 31) y = 10; if (k === 32) y = 62; if (k === 33) y = 26; if (k === 34) y = 38;
+    pts.push(y);
+    ecg.setAttribute('d', pts.map(function (p, i) { return (i ? 'L' : 'M') + (i * step) + ' ' + p.toFixed(1); }).join(' '));
+    setTimeout(beat, 40);
+  })();
+
+  // hero network: nodes, links and travelling packets
+  var cv = $('#net'), cx = cv.getContext('2d'), Wd, Hd, nodes = [], packets = [], hero = $('.hero'), vis = true;
+  new IntersectionObserver(function (es) { vis = es[0].isIntersecting; }).observe(hero);
+  function size() {
+    var d = Math.min(devicePixelRatio || 1, 2); Wd = cv.offsetWidth; Hd = cv.offsetHeight; cv.width = Wd * d; cv.height = Hd * d; cx.setTransform(d, 0, 0, d, 0, 0);
+    var count = Math.max(26, Math.round(Wd * Hd / 22000)); nodes = [];
+    for (var i = 0; i < count; i++) nodes.push({ x: Math.random() * Wd, y: Math.random() * Hd, vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25, r: 1.2 + Math.random() * 2 });
+  }
+  var mx = -999, my = -999;
+  hero.addEventListener('pointermove', function (e) { var r = cv.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
+  hero.addEventListener('pointerleave', function () { mx = my = -999; });
+  (function loop() {
+    requestAnimationFrame(loop); if (!vis || document.hidden) return;
+    cx.clearRect(0, 0, Wd, Hd); var L = 150;
+    nodes.forEach(function (a) { a.x += a.vx; a.y += a.vy; if (a.x < 0 || a.x > Wd) a.vx *= -1; if (a.y < 0 || a.y > Hd) a.vy *= -1; });
+    for (var i = 0; i < nodes.length; i++) for (var j = i + 1; j < nodes.length; j++) {
+      var a = nodes[i], b = nodes[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.sqrt(dx * dx + dy * dy);
+      if (d < L) {
+        var near = Math.min(Math.hypot(a.x - mx, a.y - my), Math.hypot(b.x - mx, b.y - my)) < 140;
+        cx.strokeStyle = near ? 'rgba(95,225,255,' + (1 - d / L) * .7 + ')' : 'rgba(120,170,255,' + (1 - d / L) * .22 + ')';
+        cx.lineWidth = near ? 1.2 : .8; cx.beginPath(); cx.moveTo(a.x, a.y); cx.lineTo(b.x, b.y); cx.stroke();
+        if (Math.random() < .0015 && packets.length < 40) packets.push({ a: a, b: b, t: 0, s: .008 + Math.random() * .012 });
+      }
+    }
+    nodes.forEach(function (a) { cx.fillStyle = 'rgba(160,210,255,.8)'; cx.beginPath(); cx.arc(a.x, a.y, a.r, 0, 6.283); cx.fill(); });
+    packets = packets.filter(function (p) {
+      p.t += p.s; if (p.t >= 1) return false;
+      var x = p.a.x + (p.b.x - p.a.x) * p.t, y = p.a.y + (p.b.y - p.a.y) * p.t;
+      cx.fillStyle = '#5fe1ff'; cx.shadowColor = '#5fe1ff'; cx.shadowBlur = 12; cx.beginPath(); cx.arc(x, y, 2.4, 0, 6.283); cx.fill(); cx.shadowBlur = 0; return true;
+    });
+  })();
+  addEventListener('resize', size); size();
+
+  // service tiles: tilt + glare; magnetic buttons
+  document.querySelectorAll('.svc').forEach(function (t) {
+    t.addEventListener('pointermove', function (e) { var r = t.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      t.style.transform = 'perspective(1000px) rotateX(' + ((.5 - y) * 5).toFixed(2) + 'deg) rotateY(' + ((x - .5) * 7).toFixed(2) + 'deg) translateY(-4px)';
+      t.style.setProperty('--gx', x * 100 + '%'); t.style.setProperty('--gy', y * 100 + '%'); });
+    t.addEventListener('pointerleave', function () { t.style.transform = ''; });
+  });
+  document.querySelectorAll('.btn-sky').forEach(function (b) {
+    b.addEventListener('pointermove', function (e) { var r = b.getBoundingClientRect(); b.style.transform = 'translate(' + ((e.clientX - r.left - r.width / 2) * .18).toFixed(1) + 'px,' + ((e.clientY - r.top - r.height / 2) * .3).toFixed(1) + 'px)'; });
+    b.addEventListener('pointerleave', function () { b.style.transform = ''; });
+  });
+})();
+</script>
+</body>
+</html>
